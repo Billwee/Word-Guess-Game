@@ -4,13 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Seymour+One&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Word Guess Game</title>
   </head>
   <body>
-    <p>Wins: <span id="wins"></span></p>
-    <p>Guesses left: <span id="guessesLeft"></span></p>
-    <p>You've guessed so far: <span id="guessed"></span></p>
+    <div id="top-section">
+      <div id="back-gradiant">
+        <h1 id="title">90's Cartoon Hangman</h1>
+      </div>
+      <div id="game-section">
+        <img id="img" src="./assets/images/fa-question.png" alt="" />
+        <h2 id="showArray"></h2>
+      </div>
+      <!-- "Press any key to begin" flashing on bottom of this div -->
+    </div>
+    <div id="left-section">
+      <p>Wins: <span id="wins"></span></p>
+      <p>Guesses left: <span id="guessesLeft"></span></p>
+    </div>
+    <div id="right-section">
+      <p>You've guessed:</p>
+      <p id="guessed"></p>
+    </div>
 
     <script src="./assets/javascript/game.js"></script>
   </body>

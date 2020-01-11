@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-image: url(../images/pattern.jpg);
+}
+
+#top-section {
+  font-family: 'Seymour One', sans-serif;
+  width: auto;
+  height: 70vh;
+  border-bottom: 5px white solid;
+}
+
+#comic {
+  width: 1500px;
+  height: 200px;
+}
+
+#title {
+  padding-bottom: 5px;
+  font-size: 80px;
+  text-shadow: 2px 2px yellow;
+  text-align: center;
+  background-color: orangered;
+  width: 70%;
+  margin: auto;
+}
+
+#back-gradiant {
+  margin-top: 20px;
+}
+#game-section {
+  display: flex;
+  justify-content: space-around;
+  /* margin-top: 100px; */
+}
+
+/* REMOVE FLEX...MAYBE FLOAT? OR GRID */
+/* CREATE DIV FOR ARRAY AND SIZE IT ACCORDINGLY */
+#showArray {
+  font-size: 50px;
+  background-color: orangered;
+}
+
+#img {
+  box-shadow: 5px 5px 5px 5px #333;
+  margin-top: 100px;
+}
+
+#left-section {
+  font-family: 'Seymour One', sans-serif;
+  float: left;
+  background-color: #333;
+  width: 50%;
+  height: 50vh;
+  border-right: 1px white solid;
+  font-size: 35px;
+}
+#left-section p {
+  margin-top: 50px;
+  margin-left: 20px;
+}
+
+#right-section {
+  font-family: 'Seymour One', sans-serif;
+  float: right;
+  background-color: #333;
+  width: 50%;
+  height: 50vh;
+  font-size: 35px;
+}
+
+#right-section p {
+  margin-top: 50px;
+  margin-left: 20px;
+}

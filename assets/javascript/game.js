@@ -1,6 +1,5 @@
 var alphabet = 'abcdefghijklmnopqrstuvwxyz ';
 var wins = 0;
-var losses = 0;
 var guessesLeft = 9;
 var yourGuesses = [];
 var keyPress;
@@ -8,10 +7,11 @@ var winsHTML = document.getElementById('wins');
 var loseHTML = document.getElementById('losses');
 var guessesLeftHTML = document.getElementById('guessesLeft');
 var guessedHTML = document.getElementById('guessed');
+var showArrayHTML = document.getElementById('showArray');
 let dash = [];
 
 let game = {
-  shows: ['but ts', 'wei ners', 'boo gers', 'ding dongs'],
+  shows: ['sho ws', 'this show', 'other sho w', 'shoiik jei jbsef'],
 
   //Checks is input is a letter
   isLetter: function(key) {
@@ -21,13 +21,16 @@ let game = {
   },
 
   isGuessed: function(key) {
-    if (alphabet.indexOf(key) >= 0) {
-      alphabet = alphabet.replace(key, '');
-      // console.log(alphabet);
-    } else {
-      alert(`You already pressed ${key}`);
-      guessesLeft += 1;
-      yourGuesses.pop();
+    if (key.toLowerCase() != key.toUpperCase() && key.length === 1) {
+      if (alphabet.indexOf(key) >= 0) {
+        alphabet = alphabet.replace(key, '');
+      } else {
+        alert(`You already pressed ${key}`);
+        guessesLeft += 1;
+        yourGuesses.pop();
+        guessedHTML.innerHTML = yourGuesses;
+        guessesLeftHTML.innerHTML = guessesLeft;
+      }
     }
   },
 
@@ -41,6 +44,7 @@ let game = {
         dash.push('_');
       }
     }
+    showArrayHTML.innerHTML = dash;
   },
 
   spaces: function() {
@@ -49,16 +53,55 @@ let game = {
         dash[i] = randomShow[i];
       }
     }
-    console.log(dash);
   },
 
   reveal: function(key, show) {
+    if (
+      show.indexOf(key) === -1 &&
+      key.toLowerCase() != key.toUpperCase() &&
+      key.length === 1
+    ) {
+      guessesLeft -= 1;
+      guessesLeftHTML.innerHTML = guessesLeft;
+      yourGuesses.push(' ' + keyPress.toUpperCase() + ' ');
+      guessedHTML.innerHTML = yourGuesses;
+    }
     for (let i = 0; i < show.length; i++) {
-      if (key === randomShow[i]) {
-        dash[i] = randomShow.charAt(i);
+      if (key === show[i]) {
+        dash[i] = show.charAt(i);
       }
     }
     console.log(dash);
+  },
+
+  winLose: function() {
+    if (guessesLeft !== 0) {
+      if (randomShow === dash.join('')) {
+        return (
+          (wins += 1),
+          (winsHTML.innerHTML = wins),
+          (guessesLeft = 9),
+          (guessesLeftHTML.innerHTML = guessesLeft),
+          (yourGuesses = []),
+          (dash = []),
+          (guessedHTML.innerHTML = yourGuesses),
+          (alphabet = 'abcdefghijklmnopqrstuvwxyz '),
+          game.getshow(),
+          console.log(randomShow)
+        );
+      }
+    } else {
+      return (
+        (guessesLeft = 9),
+        (guessesLeftHTML.innerHTML = guessesLeft),
+        (yourGuesses = []),
+        (guessedHTML.innerHTML = yourGuesses),
+        (dash = []),
+        (alphabet = 'abcdefghijklmnopqrstuvwxyz '),
+        game.getshow(),
+        console.log(randomShow)
+      );
+    }
   }
 };
 
@@ -72,42 +115,11 @@ guessesLeftHTML.innerHTML = guessesLeft;
 // Everything is in this onkeyup function
 document.onkeyup = function(event) {
   keyPress = event.key;
+
   game.isLetter(keyPress);
   game.isGuessed(keyPress);
   game.dashArray(randomShow);
   game.spaces();
   game.reveal(keyPress, randomShow);
-
-  // if (guessesLeft >= 2) {
-  //   if (keyPress.toLowerCase() !== randomShow) {
-  //     guessesLeft -= 1;
-  //     yourGuesses.push(' ' + keyPress.toLowerCase() + ' ');
-  //     guessedHTML.innerHTML = yourGuesses;
-  //     guessesLeftHTML.innerHTML = guessesLeft;
-  //   } else {
-  //     return (
-  //       (wins += 1),
-  //       (guessesLeft = 9),
-  //       (guessesLeftHTML.innerHTML = guessesLeft),
-  //       (winsHTML.innerHTML = wins),
-  //       (yourGuesses = []),
-  //       (guessedHTML.innerHTML = yourGuesses),
-  //       letter(),
-  //       console.log(randomShow),
-  //       (alphabet = 'abcdefghijklmnopqrstuvwxyz')
-  //     );
-  //   }
-  // } else {
-  //   return (
-  //     (losses += 1),
-  //     (guessesLeft = 9),
-  //     (guessesLeftHTML.innerHTML = guessesLeft),
-  //     (loseHTML.innerHTML = losses),
-  //     (yourGuesses = []),
-  //     (guessedHTML.innerHTML = yourGuesses),
-  //     letter(),
-  //     console.log(randomShow),
-  //     (alphabet = 'abcdefghijklmnopqrstuvwxyz')
-  //   );
-  // }
+  game.winLose();
 };
