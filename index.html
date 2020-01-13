@@ -5,30 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
-      href="https://fonts.googleapis.com/css?family=Seymour+One&display=swap"
+      href="https://fonts.googleapis.com/css?family=Seymour+One|Permanent+Marker&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Word Guess Game</title>
   </head>
   <body>
+    <!-- TOP SECTION -->
     <div id="top-section">
       <div id="back-gradiant">
         <h1 id="title">90's Cartoon Hangman</h1>
       </div>
-      <div id="game-section">
+    </div>
+
+    <!-- MIDDLE SECTION -->
+    <div id="game-section">
+      <div id="imageDiv">
         <img id="img" src="./assets/images/fa-question.png" alt="" />
+      </div>
+      <div id="arrayDiv">
         <h2 id="showArray"></h2>
       </div>
-      <!-- "Press any key to begin" flashing on bottom of this div -->
     </div>
-    <div id="left-section">
+    <!-- "Press any key to begin" flashing on bottom of this div -->
+
+    <!-- BOTTOM SECTIONS -->
+    <div id="bottomLeft">
       <p>Wins: <span id="wins"></span></p>
       <p>Guesses left: <span id="guessesLeft"></span></p>
     </div>
-    <div id="right-section">
+    <div id="bottomRight">
       <p>You've guessed:</p>
-      <p id="guessed"></p>
+      <p id="guessed">&nbsp;</p>
     </div>
 
     <script src="./assets/javascript/game.js"></script>
