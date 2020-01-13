@@ -61,7 +61,7 @@ let game = {
   //Checks is input is a letter
   isLetter: function(key) {
     if (!(key.toLowerCase() != key.toUpperCase() && key.length === 1)) {
-      return alert('Press a letter');
+      return (keyPress = '');
     }
   },
 
@@ -70,9 +70,7 @@ let game = {
       if (alphabet.indexOf(key) >= 0) {
         alphabet = alphabet.replace(key, '');
       } else {
-        alert(`You already pressed ${key}`);
-        guessesLeft += 1;
-        yourGuesses.pop();
+        keyPress = '';
         guessedHTML.innerHTML = yourGuesses;
         guessesLeftHTML.innerHTML = guessesLeft;
       }
