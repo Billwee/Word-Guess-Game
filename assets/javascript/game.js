@@ -1,13 +1,15 @@
 var alphabet = 'abcdefghijklmnopqrstuvwxyz ';
 var wins = 0;
-var guessesLeft = 9;
+var guessesLeft = 13;
 var yourGuesses = [];
 var keyPress;
 var winsHTML = document.getElementById('wins');
 var guessesLeftHTML = document.getElementById('guessesLeft');
 var guessedHTML = document.getElementById('guessed');
 var showArrayHTML = document.getElementById('showArray');
+var anyKeyDiv = document.getElementById('anyKeyDiv');
 let dash = [];
+var joined = '';
 
 let game = {
   shows: [
@@ -16,7 +18,7 @@ let game = {
     'darkwing duck',
     'talespin',
     'pinky & the brain',
-    "bobby's world",
+    " bobby's world ",
     'rocket power',
     'rugrats',
     'tiny toon adventures',
@@ -62,6 +64,8 @@ let game = {
   isLetter: function(key) {
     if (!(key.toLowerCase() != key.toUpperCase() && key.length === 1)) {
       return (keyPress = '');
+    } else {
+      anyKeyDiv.remove();
     }
   },
 
@@ -119,7 +123,6 @@ let game = {
       }
     }
     showArrayHTML.innerHTML = dash.join('&nbsp;');
-    console.log(dash);
   },
 
   imageSong: function() {
@@ -131,6 +134,7 @@ let game = {
     document.getElementById('img').src = this.image[x];
 
     var audio = new Audio(this.audio[x]);
+    audio.volume = 0.3;
     audio.play();
 
     setTimeout(function() {
@@ -141,17 +145,28 @@ let game = {
   winLose: function() {
     if (guessesLeft !== 0) {
       if (randomShow === dash.join('')) {
+        joined = randomShow;
+        var removeShow = game.shows.indexOf(randomShow);
         return (
-          (wins += 1),
           this.imageSong(),
+          game.shows.splice(removeShow, 1),
+          game.image.splice(removeShow, 1),
+          game.audio.splice(removeShow, 1),
+          (wins += 1),
           (winsHTML.innerHTML = wins),
-          (guessesLeft = 9),
+          (guessesLeft = 0),
           (guessesLeftHTML.innerHTML = guessesLeft),
           (yourGuesses = []),
           (dash = []),
           (guessedHTML.innerHTML = yourGuesses),
           (alphabet = 'abcdefghijklmnopqrstuvwxyz '),
           setTimeout(function() {
+            if (wins === 13) {
+              alert('No More Shows. You Win!. Reloading the page now');
+              location.reload();
+            }
+            joined = '';
+            guessesLeft = 13;
             game.getshow();
             game.dashArray(randomShow);
             game.spaces();
@@ -162,7 +177,7 @@ let game = {
       }
     } else {
       return (
-        (guessesLeft = 9),
+        (guessesLeft = 13),
         (guessesLeftHTML.innerHTML = guessesLeft),
         (yourGuesses = []),
         (guessedHTML.innerHTML = yourGuesses),
@@ -190,11 +205,12 @@ guessesLeftHTML.innerHTML = guessesLeft;
 
 // Everything is in this onkeyup function
 document.onkeyup = function(event) {
-  keyPress = event.key;
+  if (randomShow != joined) {
+    keyPress = event.key;
 
-  game.isLetter(keyPress);
-  game.isGuessed(keyPress);
-  game.spaces();
-  game.reveal(keyPress, randomShow);
-  game.winLose();
+    game.isLetter(keyPress);
+    game.isGuessed(keyPress);
+    game.reveal(keyPress, randomShow);
+    game.winLose();
+  }
 };
