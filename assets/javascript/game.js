@@ -11,6 +11,12 @@ var anyKeyDiv = document.getElementById('anyKeyDiv');
 let dash = [];
 var joined = '';
 
+//
+//
+//  WINNING SHOW DISPLAYED IN CONSOLE.
+//
+//
+
 let game = {
   shows: [
     'animaniacs',
