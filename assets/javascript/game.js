@@ -60,7 +60,11 @@ let game = {
     './assets/audio/angry.mp3'
   ],
 
-  //Checks is input is a letter
+  // Checks if what you pressed is a letter. If it
+  // isn't a letter the key pressed is 'null'
+  // if a letter is pressed it removes the "Press
+  // any letter to begin" div.
+  // Works on all keys.
   isLetter: function(key) {
     if (!(key.toLowerCase() != key.toUpperCase() && key.length === 1)) {
       return (keyPress = '');
@@ -69,6 +73,11 @@ let game = {
     }
   },
 
+  // Checks if what you pressed is a letter and if it is
+  // it's checked if it's in the 'alphabet' string
+  // and removed from the string if it is. If its not in
+  // the string the key pressed is null and it reposts
+  // yourGuesses and guessesLeft
   isGuessed: function(key) {
     if (key.toLowerCase() != key.toUpperCase() && key.length === 1) {
       if (alphabet.indexOf(key) >= 0) {
@@ -81,10 +90,13 @@ let game = {
     }
   },
 
+  // Gets a show from the array and assigns it to randomShow
   getshow: function() {
     randomShow = this.shows[Math.floor(Math.random() * this.shows.length)];
   },
 
+  // Takes the show picked and creates an array of dashes out
+  // of the letters
   dashArray: function(show) {
     if (dash.length === 0) {
       for (let i = 0; i < show.length; i++) {
@@ -93,6 +105,9 @@ let game = {
     }
   },
 
+  // reveals the spaces, apostrophies, and ampersands in the
+  // arrrays then refeshes the displayed dash array. I used
+  // the non breaking spaces to separate the  spaces...with spaces.
   spaces: function() {
     for (let i = 0; i < randomShow.length; i++) {
       if (
@@ -106,6 +121,13 @@ let game = {
     showArrayHTML.innerHTML = dash.join('&nbsp;');
   },
 
+  //Checks if your input is a letter and if its in the
+  //index of randomShow. if not it adds it to the
+  //yourGuesses array, takes a guess away, then
+  //refreshes both displayed on the page.
+  //then a loop checks if your guess is in the
+  // randomShow string. if it is the matching position
+  // in the dash array is replaced with it.
   reveal: function(key, show) {
     if (
       show.indexOf(key) === -1 &&
@@ -125,6 +147,10 @@ let game = {
     showArrayHTML.innerHTML = dash.join('&nbsp;');
   },
 
+  // finds the index of the random show and pulls the number.
+  // that number is used to play the right song and display
+  // the right images when you guess the word. then after
+  // 8 seconds it resets the image
   imageSong: function() {
     for (var i = 0; i < this.shows.length; i++) {
       if (randomShow === this.shows[i]) {
@@ -142,6 +168,17 @@ let game = {
     }, 8000);
   },
 
+  //first checks guessesLeft for loser. if not it checks if the
+  //.join() dash array matches randomShow and if it does:
+  //1. 'joined' is updated so onkeyup won't trigger
+  //2. removeShow is set to the index number of the show that was selected
+  //3. it then runs imageSong()
+  //4. removes the show from all three arrays so it cant be shown again
+  //5. resets guessesLeft, dash[], yourGuesses[], and alphabet string
+  //6. after 8 seconds it restarts the game and displays the new word
+  //if wins get to 13 the array is empty so an alert is shown that you've
+  //won and the page is reloaded.
+  //if guessesLeft hits 0 it resets the game while not removing the show
   winLose: function() {
     if (guessesLeft !== 0) {
       if (randomShow === dash.join('')) {
@@ -193,6 +230,7 @@ let game = {
   }
 };
 
+//Runs game when page is loaded
 game.getshow();
 game.dashArray(randomShow);
 game.spaces();
