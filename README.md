@@ -4,6 +4,10 @@
 
 Welcome to my Word Guess Game with a 90's theme and cartoons from that era as the answers. Radical dude!
 
+## Deployment
+
+You can view the application by [clicking here](https://billwee.github.io/Word-Guess-Game/)
+
 ## User Experience
 
 At first you will see a bouncing notification to "Press any letter to start the game". Pressing anything on your keyboard other than a letter will not start the game. I've filtered out all the other keys as inputs in this word guess game as they are not needed and could cause confusion and take away guesses you didn't want to make. Some of the show names have more than one word, apostrophes, and/or ampersands. I've included code in my game to automatically display those parts of the word once it's generated to help the player and stay true to the shows actual name.
