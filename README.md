@@ -1,6 +1,10 @@
 # Word-Guess-Game
 
+## Overview
+
 Welcome to my Word Guess Game with a 90's theme and cartoons from that era as the answers. Radical dude!
+
+## User Experience
 
 At first you will see a bouncing notification to "Press any letter to start the game". Pressing anything on your keyboard other than a letter will not start the game. I've filtered out all the other keys as inputs in this word guess game as they are not needed and could cause confusion and take away guesses you didn't want to make. Some of the show names have more than one word, apostrophes, and/or ampersands. I've included code in my game to automatically display those parts of the word once it's generated to help the player and stay true to the shows actual name.
 
@@ -15,3 +19,10 @@ I've included code which will never display the same show twice if you have gues
 Good luck and have fun!
 
 p.s. - If you're having trouble guessing the show I've included a console.log() that displays the answer at the start of every round.
+
+## Technology Used
+
+- Javascript
+- HTML
+- CSS
+
